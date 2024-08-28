@@ -1,8 +1,8 @@
-// @ts-nocheck
+//// @ts-nocheck
 import { Router } from "express";
 import { handleInputErrors } from "./modules/middleware";
 import { body, oneOf } from "express-validator";
-import { getProduct, getProducts, createProduct } from "./handlers/products";
+import { getProduct, getProducts, createProduct, updateProduct, deleteProduct } from "./handlers/products";
 
 const router = Router();
 /**
@@ -10,17 +10,13 @@ const router = Router();
  */
 router.get("/product", getProducts);
 
-router.get("/product/:id", (req, res) => {});
+router.get("/product/:id", getProduct);
 
 router.post("/product", body('name').isString(), handleInputErrors, createProduct);
-//router.post('/product', body('name').isString(), handleInputErrors, createProduct)
 
-router.put("/product/:id", body('name').isString(), handleInputErrors, (req, res) => {
+router.put("/product/:id", body('name').isString(), handleInputErrors, updateProduct);
 
-  
-});
-
-router.delete("/product/:id", (req, res) => {});
+router.delete("/product/:id", deleteProduct);
 
 /**
  * Update
